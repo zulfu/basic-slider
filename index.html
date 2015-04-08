@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var nextSlideInterval = setInterval(function(){
+				nextSlide();
+			},200)
+            
+
+			var slideCount=$('.slides li').length;
+			$('.slides').css('width', slideCount*100+'%');
+			var sliderWidth=$('.slider').width();
+			$('.slide').css('width', sliderWidth);
+			
+
+			function nextSlide () {
+				 $('.slider ul').animate({
+		            left: - sliderWidth
+		        }, 200, function () {
+		            $('.slider ul li:first-child').appendTo('.slider ul');
+		            $('.slider ul').css('left', '');
+		        });
+			}
+			function prevSlide () {
+				 $('.slider ul').animate({
+		            left: + sliderWidth
+		        }, 200, function () {
+		            $('.slider ul li:last-child').prependTo('.slider ul');
+		            $('.slider ul').css('left', '');
+		        });
+			}
+
+			$('.next').mouseup(function(event) {
+				nextSlide();
+			});
+			$('.prev').click(function(event) {
+				prevSlide ()
+			});
+		});
+	</script>
+	<style type="text/css">
+	ul,li{padding:0; margin:0;}
+	.slider{width: 500px;height: 200px; overflow: hidden;position: relative;}
+	.slides{height: 100%;position: relative;}
+	.slide{width: 500px;height: 200px;list-style: none;float: left;height: 100%;position: relative;display: block;}
+	</style>
+</head>
+<body>
+	<div class="slider">
+		<ul class="slides">
+			<li class="slide" style="background-color: yellow;">1</li>
+			<li class="slide" style="background-color: red;">2</li>
+			<li class="slide" style="background-color: green;">3</li>
+			<li class="slide" style="background-color: pink;">4</li>
+		</ul>
+	</div>
+	<button class="prev">prev</button>
+	<button class="next">next</button>
+</body>
+</html>
